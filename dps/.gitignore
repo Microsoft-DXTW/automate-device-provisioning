@@ -1,0 +1,7 @@
+**/bin/**
+**/obj/**
+bin
+obj
+**/.vs/**
+**/local.settings.json
+conn.txt

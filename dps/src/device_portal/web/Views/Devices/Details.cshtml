@@ -1,0 +1,51 @@
+﻿@model web.Models.DeviceModel
+
+@{
+    ViewData["Title"] = "Details";
+}
+
+<h2>Details</h2>
+
+<div>
+    <h4>DeviceModel</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.RegistrationId)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.RegistrationId)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.DeviceId)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.DeviceId)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.ID_Scope)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.ID_Scope)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.PrimaryKey)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.PrimaryKey)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.SecondaryKey)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.SecondaryKey)
+        </dd>
+    </dl>
+</div>
+<div>
+    @Html.ActionLink("Edit", "Edit", new { /* id = Model.PrimaryKey */ }) |
+    <a asp-action="Index">Back to List</a>
+</div>

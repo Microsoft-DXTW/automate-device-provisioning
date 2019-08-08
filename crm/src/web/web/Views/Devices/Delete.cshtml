@@ -1,0 +1,50 @@
+﻿@model web.Models.DeviceModel
+
+@{
+    ViewData["Title"] = "Delete";
+}
+
+<h2>Delete</h2>
+
+<h3>Are you sure you want to delete this?</h3>
+<div>
+    <h4>DeviceModel</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.RegistrationId)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.RegistrationId)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.DeviceId)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.DeviceId)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.AllowedDevices)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.AllowedDevices)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.DeniedDevices)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.DeniedDevices)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.Tags)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.Tags)
+        </dd>
+    </dl>
+    
+    <form asp-action="Delete">
+        <input type="submit" value="Delete" class="btn btn-default" /> |
+        <a asp-action="Index">Back to List</a>
+    </form>
+</div>

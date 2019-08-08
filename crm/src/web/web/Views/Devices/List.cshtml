@@ -1,0 +1,43 @@
+﻿@model web.Models.DeviceListModel
+
+@{
+    ViewData["Title"] = "List";
+}
+
+<h2>List</h2>
+
+<p>
+    <a asp-action="Create">Create New</a>
+</p>
+<table class="table">
+    <thead>
+        <tr>
+            <th>Device Id</th>
+            <th>Registration Id</th>
+            <th>Tags</th>
+            <th>Allowed Devices</th>
+            <th>Denied Devices</th>
+            <th>Primary Key</th>
+            <th>Secondary Key</th>
+        </tr>
+    </thead>
+    <tbody>
+        
+@foreach (var item in Model.Devices) {
+        <tr>
+            <td>@item.DeviceId</td>
+            <td>@item.RegistrationId</td>
+            <td>@item.Tags</td>
+            <td>@item.AllowedDevices</td>
+            <td>@item.DeniedDevices</td>
+            <td>@item.PrimaryKey</td>
+            <td>@item.SecondaryKey</td>
+            <td>
+                @Html.ActionLink("Edit", "Edit", new DeviceModel { DeviceId = item.DeviceId, RegistrationId = item.RegistrationId, Tags = item.Tags, DeniedDevices = item.DeniedDevices, AllowedDevices = item.AllowedDevices }) |
+                @Html.ActionLink("Details", "Details", new DeviceModel { DeviceId = item.DeviceId, RegistrationId = item.RegistrationId, Tags = item.Tags, DeniedDevices = item.DeniedDevices, AllowedDevices = item.AllowedDevices }) |
+                @Html.ActionLink("Delete", "Delete", new DeviceModel { DeviceId = item.DeviceId, RegistrationId = item.RegistrationId, Tags = item.Tags, DeniedDevices = item.DeniedDevices, AllowedDevices = item.AllowedDevices })
+            </td>
+        </tr>
+}
+    </tbody>
+</table>

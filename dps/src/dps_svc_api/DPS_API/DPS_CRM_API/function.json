@@ -1,0 +1,21 @@
+{
+  "bindings": [
+    {
+      "authLevel": "function",
+      "name": "req",
+      "type": "httpTrigger",
+      "direction": "in",
+      "methods": [
+        "get",
+        "post",
+        "delete",
+        "patch"
+      ]
+    },
+    {
+      "name": "$return",
+      "type": "http",
+      "direction": "out"
+    }
+  ]
+}

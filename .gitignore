@@ -1,0 +1,9 @@
+**/project.assets.json
+**/conn.txt
+**/local.settings.json
+**/appsettings.json
+**/bin/
+**/obj/
+**/.vs/
+**/.vscode/
+**/*.suo
