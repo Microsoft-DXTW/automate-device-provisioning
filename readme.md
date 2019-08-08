@@ -16,6 +16,8 @@ In order to better architect this solution, we devided this solution into severa
 
   Azure DPS manages device registration records, authenticate device with attestation mechanism of choice, assign a device to proper IoT Hub based on allocation policy configured in the cloud.
 
+  Device Provisioning Service provides different provisioning mechanism, for simplicity, we are using Individual enrollment with symmetric key attestation.
+   
 - Azure IoT Hub
 
   Azure IoT Hub is the front line service which has direct connection to devices. A device will be sending telemetry to its associated IoT Hub.
