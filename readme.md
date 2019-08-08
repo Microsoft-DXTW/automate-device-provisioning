@@ -26,12 +26,19 @@ In order to better architect this solution, we devided this solution into severa
 
   Instead of having backend solution talk to DPS directly, an DPS API middle tier is created to decouple DPS and backend cunsumers. The API layer should maintain a list of device registration records as well as mapping between device and IoT Hub, so that its backend consumer can query through each device when required.
 
+- Device
+
+  A Device portal is installed in the device, when user receives provision key from solution provider. He needs to connect to this portal and input provided information to provision his device.
+
+  Note:
+
+  >In this sample, we seperate device portal and device telemetry sender programs since generally speaking, provisioning and sending telemetry are different process.
+
 - Logic App
 
   Finally, a Logic App is created to accept device provisioning status report. Note that this can be done by updating device's reported property. With Logic App it is easier to integrate with other backend systems. 
 
   Note that in this sample, we do not include Logic App (yet).
-
 
 - Full Device provisioning process is illustrated below.
 
