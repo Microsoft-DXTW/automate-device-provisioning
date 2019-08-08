@@ -1,38 +1,41 @@
-## Device Provisioning Flow
+## Device Provisioning Flow Overview
 
-This sample demonstrate how to automate device provisioning process.
+In this demo, there are following participants involved in device provisioning process.
 
-(Can't see below diagram ? [Provision Flow](docs/img/provisioning-flow.jpg))
+- CRM administrator
+  
+  Who is in charge of managing devices from asset perspective. When a device is delivered to the solution provider by manufacturer, he inputs device information to the solution provider's backend system. And record to which customer this device is sold to.
 
-```mermaid
-sequenceDiagram
-    participant CRM administrator
-    participant CRM
-    participant DPS API Layer
-    participant DPS
-    participant IoT Hub
-    participant Logic App
-    participant User
-    participant Device
-    
-    CRM administrator->>CRM: Create device enrollment records
-    CRM ->> DPS API Layer: Invoke API
-    DPS API Layer ->> DPS: Create Individual Enrollment record in DPS
-    DPS ->> IoT Hub: Create device entry
-    DPS ->> DPS API Layer: Return keys
-    DPS API Layer ->> CRM: Return keys
-    CRM -->> User: Send keys
-    Note right of CRM: via email
-    
-    User ->> Device: Input keys via Device portal
-    Device ->> DPS: Provision itself
-    DPS ->> IoT Hub: Assign device to IoT Hub
-    DPS ->> Device: Return connection info
-    Device ->> Logic App: Report Provision Status
-    Device ->> Device: Store connection info
-    Logic App ->> CRM: Update device provision status
-    Device ->> IoT Hub: Send telemetry
-```
+- End user
+
+  When end user receives a device, a key information will be sent to the user from solution provider. The end user needs to register his device to the cloud.
+
+In order to better architect this solution, we devided this solution into several parts
+
+- Azure Device Provisioning Service
+
+  Azure DPS manages device registration records, authenticate device with attestation mechanism of choice, assign a device to proper IoT Hub based on allocation policy configured in the cloud.
+
+- Azure IoT Hub
+
+  Azure IoT Hub is the front line service which has direct connection to devices. A device will be sending telemetry to its associated IoT Hub.
+  
+  IoT Hub can also issue cloud-to-device commands, or request devices to update themselves by updating Desired Properties.
+
+- DPS API Middleware
+
+  Instead of having backend solution talk to DPS directly, an DPS API middle tier is created to decouple DPS and backend cunsumers. The API layer should maintain a list of device registration records as well as mapping between device and IoT Hub, so that its backend consumer can query through each device when required.
+
+- Logic App
+
+  Finally, a Logic App is created to accept device provisioning status report. Note that this can be done by updating device's reported property. With Logic App it is easier to integrate with other backend systems. 
+
+  Note that in this sample, we do not include Logic App (yet).
+
+
+- Full Device provisioning process is illustrated below.
+
+<img src="docs/img/provisioning-flow.jpg" />
 
 ## How to run this application
 
