@@ -14,6 +14,7 @@ In this document, we'll have below resources created.
 |Service Bus     | michi-iothub-events             |
 |Service Bus Queue   | device-events             |
 |Storage         | device-events                 |
+|Logic App       | DPS-Integration-Flow
 
 Deploy Cluod Resources
 ======================
