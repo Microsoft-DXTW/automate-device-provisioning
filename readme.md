@@ -42,7 +42,7 @@ In order to better architect this solution, we devided this solution into severa
 
 - Full Device provisioning process is illustrated below.
 
-<img src="docs/img/provisioning-flow.jpg" />
+<img src="docs/img/provisioning-flow.jpg"  />
 
 ##  Deploy
 
@@ -51,3 +51,35 @@ Follow this [instruction](docs/deploy.md) to deploy resourcecs.
 ## How to run this application
 
 Follow this [instruction](docs/run.md) to run this application.
+
+## Demo Script
+
+- Launch Mock CRM and navigate to Mock CRM
+```bash
+dotnet run
+```
+
+- Create a new device via IoT Device Management page
+
+Note
+>You should receives an email once created device.
+
+<img src="docs/img/mock-crm-new-device.jpg" style="width:300px;height:400px"/>
+
+- Copy Registration Id, Key 1 and Key 2 from your email
+
+- Launch Device Portal, go to IoT Device Management page. Input required information and click "Create"
+
+```bash
+dotnet run
+```
+
+- Launch Device
+
+```bash
+dotnet run
+
+##  You should see Device Id matches to newly created device
+# Connecting to IoT Hub with ConnectionString:HostName=michi-dps-20190809.azure-devices.net;DeviceId=michi-20190809-006;SharedAccessKey=xxxxxxxxx;X509Cert=False
+
+```

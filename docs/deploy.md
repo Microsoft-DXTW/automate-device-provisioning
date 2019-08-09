@@ -153,6 +153,9 @@ We use Logic App to orchestrate provisioning flow including send email to end us
         },
         "DPS_API_URL":{
             "value":"<Azure Function URL>"
+        },
+        "EMAIL_RECEIPT":{
+            "value":"someone@somemail.com"
         }
     }
 }

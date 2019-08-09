@@ -33,6 +33,7 @@ namespace web.Controllers
             {
                 try
                 {
+                    device.ID_Scope = _config.GetSection("DPS_Scope").Value;
                     var result = DPSHelper.ProvisionDeviceAsync(device).GetAwaiter().GetResult();
                     dynamic o = JsonConvert.DeserializeObject(result);
                     FileStorage.WriteProvisioningRecords(JsonConvert.DeserializeObject<DeviceModel>((string)o.Device));

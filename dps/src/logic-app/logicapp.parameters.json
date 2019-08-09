@@ -7,6 +7,9 @@
         },
         "DPS_API_URL":{
             "value":"https://michi-dps-azfunc-20190809.azurewebsites.net/api/deviceprovisioningapi?code=q26XjFa5zEyidaPKSBagX4xg0inyxl4Nfv2g7h2qMJUDF8ow8wHGTA=="
+        },
+        "EMAIL_RECEIPT":{
+            "value":"someone@somemail.com"
         }
     }
 }

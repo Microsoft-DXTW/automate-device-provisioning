@@ -7,6 +7,9 @@
         },
         "DPS_API_URL": {
             "type": "String"
+        },
+        "EMAIL_RECEIPT": {
+            "type": "String"
         }
     },
     "variables": {
@@ -147,7 +150,7 @@
                                 "body": {
                                     "Body": "<p>Your device has successfully provisioned, please use below key to register your device!<br>\n<br>\n</p>\n<p>Key 1</p>\n<p>@{body('Parse_JSON')?['attestation']?['symmetricKey']?['primaryKey']}</p>\n<p>Key 2</p>\n<p>@{body('Parse_JSON')?['attestation']?['symmetricKey']?['secondaryKey']}</p>",
                                     "Subject": "Device Provisioned :@{body('Parse_JSON')?['deviceId']}",
-                                    "To": "kalschi@gmail.com"
+                                    "To": "[parameters('EMAIL_RECEIPT')]"
                                 },
                                 "host": {
                                     "connection": {
