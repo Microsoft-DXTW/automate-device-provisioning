@@ -4,7 +4,7 @@ Overview
 ##  Resources
 In this document, we'll have below resources created.
 
-|Resource Group  |  michi-auto-provisioning-rg     |
+|Resource Type  |  Resource Name    |
 |----------------|---------------------------------|
 |Resource group  |michi-auto-provisioning-rg       |
 |IoT Hub         | michi-hub-20190809              |
