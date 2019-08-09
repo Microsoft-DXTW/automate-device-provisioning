@@ -91,8 +91,8 @@ namespace web.Controllers
                 {
                     var body = new DPSRequest();
                     body.RegistrationID = device.RegistrationId;
-                    body.Tags.Add("tags", device.Tags);
-                    body.DesiredProperties.Add("allowed", device.AllowedDevices);
+                    if(!string.IsNullOrEmpty(device.Tags))  body.Tags.Add("tags", device.Tags);
+                    if(!string.IsNullOrEmpty(device.AllowedDevices))  body.DesiredProperties.Add("allowed", device.AllowedDevices);
                     var dps = new DPSHelper(_config.GetSection("API_URL").Value);
                     var result = dps.CreateDeviceRegistration(body).GetAwaiter().GetResult();
                     dynamic o = JsonConvert.DeserializeObject(result);
@@ -100,9 +100,9 @@ namespace web.Controllers
                     device.SecondaryKey = (string)o.attestation.symmetricKey.secondaryKey;
                     WriteDataStorage(device);
                 }
-                catch
+                catch(Exception exp)
                 {
-                    return View();
+                    return View(new ErrorViewModel { RequestId = exp.Message });
                 }
             }
             return View(device);
@@ -119,9 +119,10 @@ namespace web.Controllers
                     var result = dps.DeleteDeviceRegistration(body).GetAwaiter().GetResult();
                     DeleteFromDataStorage(device);
                 }
-                catch
+                catch(Exception exp)
                 {
-                    return View();
+                    return View(new ErrorViewModel { RequestId = exp.Message });
+       
                 }
             }
             return View(device);

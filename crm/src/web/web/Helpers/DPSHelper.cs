@@ -23,11 +23,11 @@ namespace web.Helpers
                 desiredProperties = new System.Dynamic.ExpandoObject(),
                 tags = new System.Dynamic.ExpandoObject(),
             };
-            foreach(var p in DesiredProperties.Keys)
+            foreach(var p in DesiredProperties?.Keys)
             {
                 o.desiredProperties.TryAdd(p,DesiredProperties[p]);
             }
-            foreach (var t in Tags.Keys)
+            foreach (var t in Tags?.Keys)
             {
                 o.tags.TryAdd(t, Tags[t]);
             }

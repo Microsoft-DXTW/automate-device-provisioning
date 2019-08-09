@@ -26,6 +26,7 @@ namespace web.Controllers
         {
             return View(device);
         }
+        //  User input device key infor.
         public IActionResult Create(DeviceModel device)
         {
             if (device != null && !string.IsNullOrEmpty(device.RegistrationId))

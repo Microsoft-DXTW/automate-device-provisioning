@@ -17,7 +17,6 @@ namespace web.Models
         public DeviceListModel(IConfiguration config)
         {
             _config = config;
-            var scope = _config.GetSection("DPS_Scope").Value;
         }
         public DeviceListModel()
         {

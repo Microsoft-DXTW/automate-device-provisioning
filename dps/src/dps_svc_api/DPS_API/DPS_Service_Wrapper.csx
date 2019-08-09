@@ -1,17 +1,13 @@
-#r "Newtonsoft.Json"
-
-
 using System;
-using System.Net;
-using Microsoft.AspNetCore.Mvc;
-using Microsoft.Extensions.Primitives;
 using Newtonsoft.Json;
 using System.IO;
 using System.Threading.Tasks;
 using Microsoft.Azure.Devices.Provisioning.Service;
 using Microsoft.Azure.Devices.Shared;
 using Newtonsoft.Json.Linq;
+using Microsoft.Extensions.Logging;
 
+namespace DPS_API_V2{
 public class DPSAPIWrapper{
     private ProvisioningServiceClient _provisioning = null;
     private ILogger _logger = null;
@@ -98,4 +94,5 @@ public class DPSAPIWrapper{
             throw new ArgumentNullException($"Registration Id [{registrationId}] not found");
         }
     }
+}
 }
