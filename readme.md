@@ -38,9 +38,7 @@ In order to better architect this solution, we devided this solution into severa
 
 - Logic App
 
-  Finally, a Logic App is created to accept device provisioning status report. Note that this can be done by updating device's reported property. With Logic App it is easier to integrate with other backend systems. 
-
-  Note that in this sample, we do not include Logic App (yet).
+  Finally, a Logic App is created to orchestrate device provisioning process and email notification to end users.
 
 - Full Device provisioning process is illustrated below.
 
