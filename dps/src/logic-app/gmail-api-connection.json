@@ -1,0 +1,25 @@
+{
+    "$schema": "https://schema.management.azure.com/schemas/2015-01-01/deploymentTemplate.json#",
+    "contentVersion": "1.0.0.0",
+    "parameters": {
+        "connections_gmail_name": {
+            "type": "String"
+        }
+    },
+    "variables": {},
+    "resources": [
+        {
+            "type": "Microsoft.Web/connections",
+            "apiVersion": "2016-06-01",
+            "name": "[parameters('connections_gmail_name')]",
+            "location": "southeastasia",
+            "properties": {
+                "displayName": "[concat('kalschi@', parameters('connections_gmail_name'), '.com')]",
+                "customParameterValues": {},
+                "api": {
+                    "id": "[concat('/subscriptions/', subscription().subscriptionId,'/providers/Microsoft.Web/locations/southeastasia/managedApis/', parameters('connections_gmail_name'))]"
+                }
+            }
+        }
+    ]
+}

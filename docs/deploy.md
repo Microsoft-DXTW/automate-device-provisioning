@@ -136,6 +136,50 @@ func azure functionapp publish michi-dps-azfunc-20190809 --publish-local-setting
 #         Invoke url: https://michi-dps-azfunc-20190809.azurewebsites.net/api/DeviceProvisioningAPI?code=xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx==
 ```
 
+##  Logic App
+
+We use Logic App to orchestrate provisioning flow including send email to end users. Here we create a GMAIL API connection for Logic App to send email.
+
+- Update dps/src/logic-app/logicapp.parameters.json
+
+```json
+{
+    "$schema": "https://schema.management.azure.com/schemas/2015-01-01/deploymentParameters.json#",
+    "contentVersion": "1.0.0.0",
+    "parameters": {
+        "workflows_DPS_Integration_Flow_name": {
+            "value": "DPS-Integration-Flow"
+        },
+        "DPS_API_URL":{
+            "value":"<Azure Function URL>"
+        }
+    }
+}
+```
+
+- Deploy Gmail API Connection
+
+```bash
+az group deployment create -n LogicAppConnection -g michi-auto-provisioning-rg --template-file gmail-api-connection.json --parameters @gmail-api-connection.parameters.json
+
+```
+
+- Deploy Logic App
+
+```bash
+az group deployment create -n LogicAppFlow -g michi-auto-provisioning-rg --template-file logicapp.json --parameters logicapp.parameters.json
+
+```
+
+- Once deployed, login to Azure Portal. Open Logic App Designer to Authenticate the connection.
+
+<img src="img/logic-app-authenticate-connection.jpg"/>
+
+- Also, note down the Logic App HTTP endpoint URL
+
+<img src="img/logic-app-endpoint-url.jpg"/>
+
+
 Setup device codes
 ==================
 
@@ -183,7 +227,7 @@ A Mock CRM is created to demonstrate this scenario. It calls to DPS API Layer to
     }
   },
   "AllowedHosts": "*",
-  "API_URL":"<API URL>"
+  "API_URL":"<Logic App API URL>"
 }
 ```
 

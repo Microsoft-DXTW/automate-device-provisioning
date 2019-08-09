@@ -1,0 +1,12 @@
+{
+    "$schema": "https://schema.management.azure.com/schemas/2015-01-01/deploymentParameters.json#",
+    "contentVersion": "1.0.0.0",
+    "parameters": {
+        "workflows_DPS_Integration_Flow_name": {
+            "value": "DPS-Integration-Flow"
+        },
+        "DPS_API_URL":{
+            "value":"https://michi-dps-azfunc-20190809.azurewebsites.net/api/deviceprovisioningapi?code=q26XjFa5zEyidaPKSBagX4xg0inyxl4Nfv2g7h2qMJUDF8ow8wHGTA=="
+        }
+    }
+}

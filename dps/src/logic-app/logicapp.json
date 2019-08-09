@@ -1,0 +1,178 @@
+{
+    "$schema": "https://schema.management.azure.com/schemas/2015-01-01/deploymentTemplate.json#",
+    "contentVersion": "1.0.0.0",
+    "parameters": {
+        "workflows_DPS_Integration_Flow_name": {
+            "type": "String"
+        },
+        "DPS_API_URL": {
+            "type": "String"
+        }
+    },
+    "variables": {
+        "connections_gmail_externalid":"[concat('/subscriptions/', subscription().subscriptionId,'/resourceGroups/michi-auto-provisioning-rg/providers/Microsoft.Web/connections/gmail')]",
+        "id_gmail_externalid":"[concat('/subscriptions/',subscription().subscriptionId, '/providers/Microsoft.Web/locations/southeastasia/managedApis/gmail')]"
+    },
+    "resources": [
+        {
+            "type": "Microsoft.Logic/workflows",
+            "apiVersion": "2017-07-01",
+            "name": "[parameters('workflows_DPS_Integration_Flow_name')]",
+            "location": "southeastasia",
+            "properties": {
+                "state": "Enabled",
+                "definition": {
+                    "$schema": "https://schema.management.azure.com/providers/Microsoft.Logic/schemas/2016-06-01/workflowdefinition.json#",
+                    "contentVersion": "1.0.0.0",
+                    "parameters": {
+                        "$connections": {
+                            "defaultValue": {},
+                            "type": "Object"
+                        }
+                    },
+                    "triggers": {
+                        "manual": {
+                            "type": "Request",
+                            "kind": "Http",
+                            "inputs": {
+                                "schema": {}
+                            }
+                        }
+                    },
+                    "actions": {
+                        "Call_Azure_Function_API": {
+                            "runAfter": {},
+                            "type": "Http",
+                            "inputs": {
+                                "body": "@triggerBody()",
+                                "method": "POST",
+                                "uri": "[parameters('DPS_API_URL')]"
+                            }
+                        },
+                        "Parse_JSON": {
+                            "runAfter": {
+                                "Call_Azure_Function_API": [
+                                    "Succeeded"
+                                ]
+                            },
+                            "type": "ParseJson",
+                            "inputs": {
+                                "content": "@outputs('Call_Azure_Function_API')['body']",
+                                "schema": {
+                                    "properties": {
+                                        "allocationPolicy": {
+                                            "type": "string"
+                                        },
+                                        "attestation": {
+                                            "properties": {
+                                                "symmetricKey": {
+                                                    "properties": {
+                                                        "primaryKey": {
+                                                            "type": "string"
+                                                        },
+                                                        "secondaryKey": {
+                                                            "type": "string"
+                                                        }
+                                                    },
+                                                    "type": "object"
+                                                },
+                                                "type": {
+                                                    "type": "string"
+                                                }
+                                            },
+                                            "type": "object"
+                                        },
+                                        "createdDateTimeUtc": {
+                                            "type": "string"
+                                        },
+                                        "deviceId": {
+                                            "type": "string"
+                                        },
+                                        "etag": {
+                                            "type": "string"
+                                        },
+                                        "initialTwin": {
+                                            "properties": {
+                                                "properties": {
+                                                    "properties": {
+                                                        "desired": {
+                                                            "properties": {},
+                                                            "type": "object"
+                                                        }
+                                                    },
+                                                    "type": "object"
+                                                },
+                                                "tags": {
+                                                    "properties": {},
+                                                    "type": "object"
+                                                }
+                                            },
+                                            "type": "object"
+                                        },
+                                        "lastUpdatedDateTimeUtc": {
+                                            "type": "string"
+                                        },
+                                        "provisioningStatus": {
+                                            "type": "string"
+                                        },
+                                        "registrationId": {
+                                            "type": "string"
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        },
+                        "Response": {
+                            "runAfter": {
+                                "Send_email_(V2)": [
+                                    "Succeeded"
+                                ]
+                            },
+                            "type": "Response",
+                            "kind": "Http",
+                            "inputs": {
+                                "body": "@outputs('Call_Azure_Function_API')['body']",
+                                "statusCode": 200
+                            }
+                        },
+                        "Send_email_(V2)": {
+                            "runAfter": {
+                                "Parse_JSON": [
+                                    "Succeeded"
+                                ]
+                            },
+                            "type": "ApiConnection",
+                            "inputs": {
+                                "body": {
+                                    "Body": "<p>Your device has successfully provisioned, please use below key to register your device!<br>\n<br>\n</p>\n<p>Key 1</p>\n<p>@{body('Parse_JSON')?['attestation']?['symmetricKey']?['primaryKey']}</p>\n<p>Key 2</p>\n<p>@{body('Parse_JSON')?['attestation']?['symmetricKey']?['secondaryKey']}</p>",
+                                    "Subject": "Device Provisioned :@{body('Parse_JSON')?['deviceId']}",
+                                    "To": "kalschi@gmail.com"
+                                },
+                                "host": {
+                                    "connection": {
+                                        "name": "@parameters('$connections')['gmail']['connectionId']"
+                                    }
+                                },
+                                "method": "post",
+                                "path": "/v2/Mail"
+                            }
+                        }
+                    },
+                    "outputs": {}
+                },
+                "parameters": {
+                    "$connections": {
+                        "value": {
+                            "gmail": {
+                                "connectionId": "[variables('connections_gmail_externalid')]",
+                                "connectionName": "gmail",
+                                "id": "[variables('id_gmail_externalid')]"
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    ]
+}
