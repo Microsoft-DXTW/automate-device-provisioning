@@ -46,6 +46,10 @@ In order to better architect this solution, we devided this solution into severa
 
 <img src="docs/img/provisioning-flow.jpg" />
 
+##  Deploy
+
+Follow this [instruction](docs/deploy.md) to deploy resourcecs.
+
 ## How to run this application
 
 #### Backend application
