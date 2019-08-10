@@ -50,8 +50,9 @@ namespace Microsoft.Azure.Devices.Provisioning.Client.Samples
             }else{
                 throw new ArgumentNullException("Connection information");
             }
-            
-            client.SetMethodHandlerAsync("Reprovision", ReprovisionHandler, null).GetAwaiter().GetResult();
+            //  TODO: Should handle reprovision ? If so, then should switch to 
+            //          DeviceProvisioningClient instead of DeviceClient to create IoT hub connection
+            //client.SetMethodHandlerAsync("Reprovision", ReprovisionHandler, null).GetAwaiter().GetResult();
             client.SetDesiredPropertyUpdateCallbackAsync(DesiredPropertyUpdated, null).GetAwaiter().GetResult();
             return client;
         }
