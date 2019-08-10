@@ -5,3 +5,4 @@ obj
 **/.vs/**
 **/local.settings.json
 conn.txt
+secure_conn.json
