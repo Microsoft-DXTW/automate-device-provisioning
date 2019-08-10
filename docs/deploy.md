@@ -4,17 +4,17 @@ Overview
 ##  Resources
 In this document, we'll have below resources created.
 
-|Resource Type  |  Resource Name    |
-|----------------|---------------------------------|
-|Resource group  |michi-auto-provisioning-rg       |
-|IoT Hub         | michi-hub-20190809              |
-|IoT DPS         | michi-dps-20190809              |
-|Azure Function  | michi-dps-azfunc-20190809       |
-|Storage         | dpsmichistorage                 |
-|Service Bus     | michi-iothub-events             |
-|Service Bus Queue   | device-events             |
-|Storage         | device-events                 |
-|Logic App       | DPS-Integration-Flow
+|Resource Type  |  Resource Name    | Comment |
+|----------------|---------------------------------|-----|
+|Resource group  |michi-auto-provisioning-rg       | Contains all resources |
+|IoT Hub         | michi-hub-20190809              | |
+|IoT DPS         | michi-dps-20190809              | |
+|Azure Function  | michi-dps-azfunc-20190809       | DPS Api Wrapper |
+|Storage         | dpsmichistorage                 | For Azure Function | 
+|Service Bus     | michi-iothub-events             | Service Bus namespace |
+|Service Bus Queue   | device-events             |  Receives device provision events|
+|Logic App       | DPS-Integration-Flow | Orchestrate device provisioning flow |
+|API Connection | gmail | API conenction to Gmail for sending emails |
 
 Deploy Cluod Resources
 ======================
