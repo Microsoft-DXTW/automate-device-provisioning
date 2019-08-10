@@ -9,7 +9,7 @@ using System.IO;
 namespace Microsoft.Azure.Devices.Provisioning.Client.Samples
 {
     public class RandomTelemetry {
-        private readonly string _dataFolder = @"../data";
+        private readonly string _dataFolder = @"./data";
         
         private readonly string [] _files = new string [] {"random_telemetry.json"};
 

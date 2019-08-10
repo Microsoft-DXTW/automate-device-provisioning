@@ -5,9 +5,9 @@
     <TargetFramework>netcoreapp2.0</TargetFramework>
   </PropertyGroup>
   <ItemGroup>
-    <Compile Include="..\Common\RandomTelemetry.cs" Link="RandomTelemetry.cs" />
-    <Compile Include="..\Common\DPSDeviceClient.cs" Link="DPSDeviceClient.cs" />
-    <Compile Include="..\Common\DataStorage.cs" Link="DataStorage.cs" />
+    <Compile Include=".\Common\RandomTelemetry.cs" Link="RandomTelemetry.cs" />
+    <Compile Include=".\Common\DPSDeviceClient.cs" Link="DPSDeviceClient.cs" />
+    <Compile Include=".\Common\DataStorage.cs" Link="DataStorage.cs" />
   </ItemGroup>
   <ItemGroup>
     <PackageReference Include="Microsoft.Azure.Devices.Client" Version="1.20.0" />
