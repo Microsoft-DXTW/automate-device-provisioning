@@ -102,7 +102,7 @@ namespace web.Controllers
                 }
                 catch(Exception exp)
                 {
-                    return View(new ErrorViewModel { RequestId = exp.Message });
+                    return View(new ErrorViewModel { ErrorMessage = exp.Message });
                 }
             }
             return View(device);
@@ -121,7 +121,7 @@ namespace web.Controllers
                 }
                 catch(Exception exp)
                 {
-                    return View(new ErrorViewModel { RequestId = exp.Message });
+                    return View(new ErrorViewModel { ErrorMessage = exp.Message });
        
                 }
             }

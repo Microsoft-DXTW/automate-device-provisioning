@@ -40,7 +40,7 @@ namespace web.Controllers
                 }
                 catch(Exception exp)
                 {
-                    return View();
+                    return View(new ErrorViewModel{ErrorMessage = exp.Message});
                 }
             }
             return View(device);
