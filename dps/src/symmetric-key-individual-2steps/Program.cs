@@ -15,7 +15,6 @@ namespace SymmetricKeySample
 {
     class Program
     {
-        private static string _iothub = "";
         private static IAuthenticationMethod GetAuthenticationMethod(){
             string json = new DataStorage().Read("AuthenticationMethod");
             if(!string.IsNullOrEmpty(json)){
@@ -38,20 +37,14 @@ namespace SymmetricKeySample
             ReadJsonConfiguration();
             
             var db = new DataStorage();
-            
-            _iothub = db.Read("IotHub");
-            var auth = GetAuthenticationMethod();
-            var connstring = db.Read("ConnectionString");
-
+            var secureConnection = db.Read("ConnectionString");
+            DevicePortalInfoModel o = JsonConvert.DeserializeObject<DevicePortalInfoModel>(secureConnection);
+            DeviceAuthenticationWithRegistrySymmetricKey auth = (DeviceAuthenticationWithRegistrySymmetricKey)o.Auth;
+            string iotHub = (string)o.Host;
             DPSDeviceClient sample = null;
-            
-            if(!String.IsNullOrEmpty(_iothub)){
-                Console.WriteLine($"Connecting to IoT Hub with AuthenticationMethod:{_iothub}");
-                sample = new DPSDeviceClient(_iothub, auth);
-            }else{
-                Console.WriteLine($"Connecting to IoT Hub with ConnectionString:{connstring}");
-                sample = new DPSDeviceClient(connstring);
-            }
+                      
+            Console.WriteLine($"Connecting to IoT Hub with AuthenticationMethod:{iotHub}");
+            sample = new DPSDeviceClient(iotHub, auth);
             
             sample.StartAsync().GetAwaiter().GetResult();
 

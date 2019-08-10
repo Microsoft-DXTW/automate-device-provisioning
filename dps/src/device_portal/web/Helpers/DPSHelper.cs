@@ -69,7 +69,7 @@ namespace web.Helpers
             }
             return auth;
         }
-        public static async Task<string> ProvisionDeviceAsync(DeviceModel device)
+        public static async Task<DevicePortalInfoModel> ProvisionDeviceAsync(DeviceModel device)
         {
             try
             {
@@ -89,14 +89,14 @@ namespace web.Helpers
                         var builder = IotHubConnectionStringBuilder.Create(host, auth);
                         device.PrimaryKey = security.GetPrimaryKey();
                         device.SecondaryKey = security.GetSecondaryKey();
-                        var o = new
+                        var o = new DevicePortalInfoModel
                         {
                             Host = host,
-                            Auth = JsonConvert.SerializeObject(auth),
-                            Device = JsonConvert.SerializeObject(device),
+                            Auth = auth,
+                            Device = device,
                             ConnectionString = builder.ToString()
                         };
-                        return JsonConvert.SerializeObject(o);
+                        return o;
                     }
                 }
             }

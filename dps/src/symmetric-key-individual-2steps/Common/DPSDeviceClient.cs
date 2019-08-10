@@ -15,10 +15,10 @@ namespace Microsoft.Azure.Devices.Provisioning.Client.Samples
     public class DPSDeviceClient
     {
         bool _sendTelemetry = true;
-        IAuthenticationMethod _auth = null;
+        DeviceAuthenticationWithRegistrySymmetricKey _auth = null;
         string _iotHub = string.Empty;
         string _connectionString = string.Empty;
-        public DPSDeviceClient(string iotHubName, IAuthenticationMethod auth)
+        public DPSDeviceClient(string iotHubName, DeviceAuthenticationWithRegistrySymmetricKey auth)
         {
             _auth = auth;
             _iotHub = iotHubName;
@@ -31,7 +31,6 @@ namespace Microsoft.Azure.Devices.Provisioning.Client.Samples
         #region Direct Methods
         private async Task<Microsoft.Azure.Devices.Client.MethodResponse> ReprovisionHandler(MethodRequest methodRequest, object userContext){
             Console.WriteLine("Cloud Invokes Reprovision method...");
-
             await StartAsync();
 
             return new MethodResponse(0);

@@ -35,20 +35,10 @@ namespace web.Controllers
                 {
                     device.ID_Scope = _config.GetSection("DPS_Scope").Value;
                     var result = DPSHelper.ProvisionDeviceAsync(device).GetAwaiter().GetResult();
-                    dynamic o = JsonConvert.DeserializeObject(result);
-                    FileStorage.WriteProvisioningRecords(JsonConvert.DeserializeObject<DeviceModel>((string)o.Device));
-                    FileStorage.WriteConnectionString((string)o.ConnectionString);
-                    /*
-                     * new
-                    {
-                        Host = host,
-                        Auth = JsonConvert.SerializeObject(auth),
-                        Device = device,
-                        ConnectionString = builder.ToString()
-                    };
-                     * */
+                    FileStorage.WriteProvisioningRecords(result.Device);
+                    FileStorage.WriteDeviceProvisioningInfo(JsonConvert.SerializeObject(result));
                 }
-                catch
+                catch(Exception exp)
                 {
                     return View();
                 }
