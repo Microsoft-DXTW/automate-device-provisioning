@@ -14,3 +14,5 @@
 
 #### Device
 [Symmetric Key individual enrollment - two steps registration](symmetric-key-individual-2steps/)
+
+[Symmetric Key individual enrollment - Allow deivce to reprovision itself by taking Direct Method request from cloud](device-symmetrickey-allow-reprovision/)

@@ -4,13 +4,7 @@
     <OutputType>Exe</OutputType>
     <TargetFramework>netcoreapp2.1</TargetFramework>
   </PropertyGroup>
-  <ItemGroup>
-    <Compile Include=".\Common\RandomTelemetry.cs" Link="RandomTelemetry.cs" />
-    <Compile Include=".\Common\DPSDeviceClient.cs" Link="DPSDeviceClient.cs" />
-    <Compile Include=".\Common\DataStorage.cs" Link="DataStorage.cs" />
-    <Compile Include=".\Common\DeviceModel.cs" Link="DeviceModel.cs" />
-    <Compile Include=".\Common\DevicePortalInfoModel.cs" Link="DevicePortalInfoModel.cs" />
-  </ItemGroup>
+  
   <ItemGroup>
     <PackageReference Include="Microsoft.Azure.Devices.Client" Version="1.20.0" />
     <PackageReference Include="Microsoft.Azure.Devices.Provisioning.Transport.Amqp" Version="1.1.6" />

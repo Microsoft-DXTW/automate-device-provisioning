@@ -44,7 +44,7 @@ namespace SymmetricKeySample
             DPSDeviceClient sample = null;
                       
             Console.WriteLine($"Connecting to IoT Hub with AuthenticationMethod:{iotHub}");
-            sample = new DPSDeviceClient(iotHub, auth);
+            sample = new DPSDeviceClient(db);
             
             sample.StartAsync().GetAwaiter().GetResult();
 

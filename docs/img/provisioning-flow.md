@@ -2,7 +2,7 @@
 
 ```mermaid
 sequenceDiagram
-    participant CRM administrator
+    participant CRM user
     participant CRM
     participant Logic App
     participant DPS API Layer
@@ -13,7 +13,7 @@ sequenceDiagram
     participant User
     participant Device
 
-    CRM administrator->>CRM: Create device enrollment records
+    CRM user->>CRM: Create device enrollment records
     CRM ->> Logic App: Trigger Provisioning Flow
     Logic App ->> DPS API Layer: Invoke API
     DPS API Layer ->> DPS: Create Individual Enrollment record in DPS

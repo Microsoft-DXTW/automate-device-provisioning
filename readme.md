@@ -2,7 +2,7 @@
 
 In this demo, there are following participants involved in device provisioning process.
 
-- CRM administrator
+- CRM user
   
   Who is in charge of managing devices from asset perspective. When a device is delivered to the solution provider by manufacturer, he inputs device information to the solution provider's backend system. And record to which customer this device is sold to.
 
