@@ -79,6 +79,7 @@ namespace Microsoft.Azure.Devices.Provisioning.Client.Samples
             {
                 using (var transport = new ProvisioningTransportHandlerAmqp(TransportFallbackType.TcpOnly))
                 {
+                    _sendTelemetry = false;
                     ProvisioningDeviceClient provClient =
                         ProvisioningDeviceClient.Create(GlobalDeviceEndpoint, scope, security, transport);
                     DeviceRegistrationResult result = await provClient.RegisterAsync().ConfigureAwait(false);
@@ -89,9 +90,26 @@ namespace Microsoft.Azure.Devices.Provisioning.Client.Samples
                     var client = Microsoft.Azure.Devices.Client.DeviceClient.Create(result.AssignedHub, model.Auth, TransportType.Amqp);
                     client.SetMethodHandlerAsync("Reprovision", ReprovisionHandler, null).GetAwaiter().GetResult();
                     client.SetDesiredPropertyUpdateCallbackAsync(DesiredPropertyUpdated, null).GetAwaiter().GetResult();
-                    
+
                     //  TODO:Save new connection information
+                    var auth = new DeviceAuthenticationWithRegistrySymmetricKey(result.DeviceId, security.GetPrimaryKey());
+                    var host = result.AssignedHub;
+                    var builder = IotHubConnectionStringBuilder.Create(host, auth);
+                    var device = new DevicePortalInfoModel
+                    {
+                        Host = result.AssignedHub,
+                        Auth = new DeviceAuthenticationWithRegistrySymmetricKey(result.DeviceId, security.GetPrimaryKey()),
+                        Device = new DeviceModel{
+                            ID_Scope = scope,
+                            PrimaryKey = security.GetPrimaryKey(),
+                            SecondaryKey = security.GetSecondaryKey(),
+                            RegistrationId = result.RegistrationId,
+                            DeviceId = result.DeviceId
+                        },
+                        ConnectionString = builder.ToString()
+                    };
                     
+                    _storage.Write(DataStorage.DeviceConnectionString, JsonConvert.SerializeObject(device));
                     return client;
                 }
             }
