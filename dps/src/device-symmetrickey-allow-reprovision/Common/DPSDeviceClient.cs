@@ -53,6 +53,13 @@ namespace Microsoft.Azure.Devices.Provisioning.Client.Samples
                         message.ContentType = "application/JSON";
                         message.ContentEncoding = "utf-8";
                         Console.WriteLine($"Sending telemetry...{line}");
+
+                        if(new Random().Next(1, 100) >= 50 ){
+                            Console.WriteLine($"** Updating Reported Property...");
+                            var property = new {reported_temperature = new Random().Next(1, 50)};
+                            await iotClient.UpdateReportedPropertiesAsync(new TwinCollection(JsonConvert.SerializeObject(property)));
+                        }
+
                         await iotClient.SendEventAsync(message).ConfigureAwait(false);
                         await Task.Delay(1000 * 3);
                     }
