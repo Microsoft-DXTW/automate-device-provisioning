@@ -1,3 +1,18 @@
-{"message":"sample1"}
-{"message":"sample2"}
-{"message":"sample3"}
+{"temperature":12, "time":"2019-08-25T00:00:00.000Z"}
+{"temperature":13, "time":"2019-08-25T00:00:02.000Z"}
+{"temperature":14, "time":"2019-08-25T00:00:03.000Z"}
+{"temperature":12, "time":"2019-08-25T00:00:05.000Z"}
+{"temperature":13, "time":"2019-08-25T00:00:06.000Z"}
+{"temperature":94, "time":"2019-08-25T00:00:10.000Z"}
+{"temperature":92, "time":"2019-08-25T00:00:12.000Z"}
+{"temperature":93, "time":"2019-08-25T00:00:13.000Z"}
+{"temperature":94, "time":"2019-08-25T00:00:14.000Z"}
+{"temperature":92, "time":"2019-08-25T00:00:15.000Z"}
+{"temperature":13, "time":"2019-08-25T00:00:20.000Z"}
+{"temperature":14, "time":"2019-08-25T00:00:21.000Z"}
+{"temperature":12, "time":"2019-08-25T00:00:22.000Z"}
+{"temperature":13, "time":"2019-08-25T00:00:25.000Z"}
+{"temperature":14, "time":"2019-08-25T00:00:30.000Z"}
+{"temperature":12, "time":"2019-08-25T00:00:31.000Z"}
+{"temperature":13, "time":"2019-08-25T00:00:33.000Z"}
+{"temperature":14, "time":"2019-08-25T00:00:34.000Z"}
