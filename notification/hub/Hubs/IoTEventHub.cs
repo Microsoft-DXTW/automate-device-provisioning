@@ -2,7 +2,6 @@ using Microsoft.AspNetCore.SignalR;
 
 namespace hub.Hubs
 {
-
     public class IoTEventHub : Hub
     {
         public void NotifyUsers(string message){
@@ -13,7 +12,9 @@ namespace hub.Hubs
         // }
         public void Echo(string name, string message)
         {
-            Clients.Client(Context.ConnectionId).SendAsync("echo", name, message + " (echo from server)");
+            Clients.Client(Context.ConnectionId).SendAsync("notifyusers", $"sending {message}");
+        
+            //Clients.Client(Context.ConnectionId).SendAsync("echo", name, message + " (echo from server)");
         }
     }
 }

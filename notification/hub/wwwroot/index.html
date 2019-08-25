@@ -111,7 +111,7 @@
 
             function onConnected(connection) {
                 console.log('connection started');
-                connection.send('notifyusers', '_SYSTEM_', username + ' JOINED');
+                connection.send('notifyusers', username + ' JOINED');
                 document.getElementById('sendmessage').addEventListener('click', function (event) {
                     // Call the broadcastMessage method on the hub.
                     if (messageInput.value) {
