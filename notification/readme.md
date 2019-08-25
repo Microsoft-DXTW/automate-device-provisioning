@@ -1,7 +1,22 @@
 ## Overview
 
+It is a common scenario that your operator or IT administrator may want to get notifications when IoT devices are sending alerts to your backend solution.
+
+We have created a sample IoT solution, now we want to add alert mechanism to existing solution. To decouple notification mechanism with IoT solution, we will be creating a Stream Analytics Job to detect if there is any issues, send those events of error to a Service Bus Topic.
+
+An Azure Functions App will then pick up these messages and broadcast to IT operators via SignalR service.
+
+<img src="../docs/img/architecture-notification-flow.jpg" style="width:500px;height:300px"/>
 
 ## Setup
+
+[Service Bus Topic](#service-bus-topic)
+
+[Stream Analytics Job](#stream-analytics)
+
+[SignalR Service & Application backend](#signalr-service--application-backend)
+
+[Azure Functions](#azure-functions)
 
 #### Service Bus Topic
 
@@ -79,6 +94,41 @@ WHERE
 
 -   Start the job
 
+#### SignalR Service & Application backend
+
+-   Create SignalR Service
+
+```bash
+ az signalr create -n michi-signalr-20190824 -g michi-auto-provisioning-rg --sku Free_F1 -l southeastasia
+ ```
+
+-   Get SignalR Connection String
+
+```bash
+ az signalr key list -n michi-signalr-20190824 -g michi-auto-provisioning-rg
+ ```
+
+-   Update /notifications/hub/appsettings.json with SignalR connection string retrieved above
+
+```json
+{
+  "Logging": {
+    "LogLevel": {
+      "Default": "Warning"
+    }
+  },
+  "AllowedHosts": "*",
+  "SignalRService":"<SIGNALR_CONNECTIONSTRING>;"
+}
+```
+-   By default, the sample SignalR client app connects to https://localhost:5001/deviceEvents. Change to your SignalR app URL by editing /notifications/hub/wwwroot/index.html
+
+```javascript
+var connection = new signalR.HubConnectionBuilder()
+                            .withUrl('<UPDATE YOUR URL HERE>')
+                            .build();
+```
+
 #### Azure Functions
 
 -   Create a new Azure Function project
@@ -112,8 +162,6 @@ public static void Run([ServiceBusTrigger("<SB_NAMESPANCE_NAME>",
                                         [SignalR(HubName = "deviceEvents")]IAsyncCollector<SignalRMessage> signalRMessages)
                                         {/*...*/}
 ```
-
-#### SignalR Service
 
 ## SignalR Reference
 

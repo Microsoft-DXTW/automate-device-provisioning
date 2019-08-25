@@ -1,6 +1,6 @@
 ## Device Provisioning Flow Overview
 
-In this demo, there are following participants involved in device provisioning process.
+In this demo, there are following participants involved in device provisioning process. We will also be adding notification mechanism to this solution, details please refer to [this section](#notification-mechanism)
 
 - CRM user
   
@@ -83,3 +83,8 @@ dotnet run
 # Connecting to IoT Hub with ConnectionString:HostName=michi-dps-20190809.azure-devices.net;DeviceId=michi-20190809-006;SharedAccessKey=xxxxxxxxx;X509Cert=False
 
 ```
+
+
+## Notification Mechanism
+
+[Notification Setup](notification/readme.md)
