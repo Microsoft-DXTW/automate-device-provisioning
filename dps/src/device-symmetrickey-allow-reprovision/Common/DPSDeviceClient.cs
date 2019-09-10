@@ -44,7 +44,7 @@ namespace Microsoft.Azure.Devices.Provisioning.Client.Samples
                 await GetCloudConfiguration(iotClient);
                 var i = 0;
                 _sendTelemetry = true;
-                var telemetryGenerator = new RandomTelemetry();
+                var telemetryGenerator = new RandomTelemetry(new TelemetryDataFormatter());
                 while( i ++ < 100 && _sendTelemetry){
                     Console.WriteLine("DeviceClient SendEventAsync.");
                     foreach(var line in telemetryGenerator.GenerateTelemetryLines())
